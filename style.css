@@ -1,0 +1,39 @@
+#modalMovieDescription {
+    white-space: pre-wrap;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Выравнивание текста влево */
+}
+.card {
+    position: relative;
+}
+.btn-outline-danger {
+    z-index: 10; /* Чтобы кнопка была выше изображения */
+}
+.card {
+    position: relative; /* Чтобы кнопка могла позиционироваться относительно карточки */
+    margin-bottom: 20px; /* Отступ снизу карточки */
+}
+
+.btn-outline-danger {
+    margin: 10px; /* Отступ для кнопки */
+}
+.favorite-btn {
+    background-color: red; /* Красный фон */
+    color: white; /* Белый цвет текста */
+}
+
+.favorite-btn i {
+    color: white; /* Белое сердечко */
+}
+
+.favorite-btn.active {
+    background-color: white; /* Белый фон при активации */
+    color: red; /* Красный текст */
+}
+
+.favorite-btn.active i {
+    color: red; /* Красное сердечко при активации */
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Избранные фильмы</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        .card {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="./index.html">Кинопоиск</a>
+            <a href="./index.html" class="btn btn-outline-secondary">На главную</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <h2 class="my-3">Избранные фильмы</h2>
+        <div class="row" id="favorites-list"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const favoritesList = document.getElementById("favorites-list");
+            const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+            if (favorites.length === 0) {
+                favoritesList.innerHTML = "<p>Нет избранных фильмов.</p>";
+            } else {
+                favorites.forEach(movie => {
+                    const card = document.createElement("div");
+                    card.className = "col-md-4";
+                    card.innerHTML = `
+                        <div class="card">
+                            <img src="${movie.Poster}" class="card-img-top" alt="${movie.Title}">
+                            <div class="card-body">
+                                <h5 class="card-title">${movie.Title}</h5>
+                                <p class="card-text">Год: ${movie.Year}</p>
+                                <button class="btn btn-danger" aria-label="Удалить из избранного">Удалить</button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Обработчик для кнопки удаления
+                    card.querySelector("[aria-label='Удалить из избранного']").addEventListener("click", function() {
+                        removeFromFavorites(movie.Title);
+                        card.remove(); // Удаляем карточку из DOM
+                    });
+
+                    favoritesList.appendChild(card);
+                });
+            }
+        });
+
+        function removeFromFavorites(movieTitle) {
+            let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+            favorites = favorites.filter(movie => movie.Title !== movieTitle);
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+        }
+    </script>
+</body>
+</html>
